@@ -33,7 +33,6 @@ const EducationalForm = () => {
     e.preventDefault();
     try {
       await validateSchema.validate(educationalData, { abortEarly: false });
-      console.log("Form Submitted", educationalData);
       // TODO : Submit this form data to redux store
     } catch (error) {
       const customError = {};
@@ -46,7 +45,7 @@ const EducationalForm = () => {
 
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
-      <h3 className="text-2xl font-semibold mb-6">Educational Form</h3>
+      <h3 className="text-2xl font-semibold mb-6">Educational Information</h3>
       <form onSubmit={handleFormSubmit} className="space-y-4">
         <div>
           <label
@@ -60,9 +59,7 @@ const EducationalForm = () => {
             name="degree"
             value={educationalData.degree}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.degree ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.degree && (
             <p className="text-red-500 text-sm mt-1">{formError.degree}</p>
@@ -80,9 +77,7 @@ const EducationalForm = () => {
             name="fieldOfStudy"
             value={educationalData.fieldOfStudy}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.fieldOfStudy ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.fieldOfStudy && (
             <p className="text-red-500 text-sm mt-1">
@@ -102,9 +97,7 @@ const EducationalForm = () => {
             name="university"
             value={educationalData.university}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.university ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.university && (
             <p className="text-red-500 text-sm mt-1">{formError.university}</p>
@@ -122,9 +115,7 @@ const EducationalForm = () => {
             name="location"
             value={educationalData.location}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.location ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.location && (
             <p className="text-red-500 text-sm mt-1">{formError.location}</p>
@@ -142,9 +133,7 @@ const EducationalForm = () => {
             name="startDate"
             value={educationalData.startDate}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.startDate ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.startDate && (
             <p className="text-red-500 text-sm mt-1">{formError.startDate}</p>
@@ -162,9 +151,7 @@ const EducationalForm = () => {
             name="endDate"
             value={educationalData.endDate}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.endDate ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.endDate && (
             <p className="text-red-500 text-sm mt-1">{formError.endDate}</p>

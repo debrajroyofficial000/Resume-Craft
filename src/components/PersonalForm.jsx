@@ -22,8 +22,14 @@ const PersonalForm = () => {
       "Phone number must be 10 digits"
     ),
     address: Yup.string().required("Address is required"),
-    linkedInProfile: Yup.string().url("Invalid URL").nonNullable().required(),
-    portfolio: Yup.string().url("Invalid Url").nonNullable().required(),
+    linkedInProfile: Yup.string()
+      .url("Invalid URL")
+      .nonNullable()
+      .required("Linkedin Profile is required"),
+    portfolio: Yup.string()
+      .url("Invalid Url")
+      .nonNullable()
+      .required("Portfolio link is required"),
   });
 
   const handleChange = (e) => {
@@ -35,7 +41,8 @@ const PersonalForm = () => {
     e.preventDefault();
     try {
       await validateSchema.validate(personalData, { abortEarly: false });
-      console.log("Form submitted", personalData);
+
+      setFormError({});
 
       // TODO : SEND THIS FORM DATA TO REDUX STORE
     } catch (error) {
@@ -49,7 +56,7 @@ const PersonalForm = () => {
 
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
-      <h3 className="text-2xl font-semibold mb-6">Personal Data</h3>
+      <h3 className="text-2xl font-semibold mb-6">Personal Information</h3>
       <form onSubmit={handlePersonalForm} className="space-y-4">
         <div>
           <label
@@ -63,9 +70,7 @@ const PersonalForm = () => {
             name="name"
             value={personalData.name}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.name ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.name && <p className="text-red-500">{formError.name}</p>}
         </div>
@@ -81,9 +86,7 @@ const PersonalForm = () => {
             name="email"
             value={personalData.email}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.email ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.email && <p className="text-red-500">{formError.email}</p>}
         </div>
@@ -99,9 +102,7 @@ const PersonalForm = () => {
             name="phoneNumber"
             value={personalData.phoneNumber}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.phoneNumber ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.phoneNumber && (
             <p className="text-red-500">{formError.phoneNumber}</p>
@@ -118,9 +119,7 @@ const PersonalForm = () => {
             name="address"
             value={personalData.address}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.address ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.address && (
             <p className="text-red-500">{formError.address}</p>
@@ -138,9 +137,7 @@ const PersonalForm = () => {
             name="linkedInProfile"
             value={personalData.linkedInProfile}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.linkedInProfile ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.linkedInProfile && (
             <p className="text-red-500">{formError.linkedInProfile}</p>
@@ -158,9 +155,7 @@ const PersonalForm = () => {
             name="portfolio"
             value={personalData.portfolio}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.portfolio ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {formError.portfolio && (
             <p className="text-red-500">{formError.portfolio}</p>
