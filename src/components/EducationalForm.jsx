@@ -1,7 +1,9 @@
 import { useState } from "react";
 import * as Yup from "yup";
-
+import { useDispatch } from "react-redux";
+import { addEducationalData } from "../features/educationSlice";
 const EducationalForm = () => {
+  const dispatch = useDispatch()
   const [formError, setFormError] = useState({});
   const [educationalData, setEducationalData] = useState({
     degree: "",
@@ -34,6 +36,7 @@ const EducationalForm = () => {
     try {
       await validateSchema.validate(educationalData, { abortEarly: false });
       // TODO : Submit this form data to redux store
+      dispatch(addEducationalData(educationalData))
     } catch (error) {
       const customError = {};
       error.inner.forEach((err) => {

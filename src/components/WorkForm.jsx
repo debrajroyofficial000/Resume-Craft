@@ -1,7 +1,9 @@
 import { useState } from "react";
 import * as Yup from "yup";
-
+import { useDispatch } from "react-redux";
+import { addWorkData } from "../features/workSlice";
 const WorkForm = () => {
+  const dispatch = useDispatch();
   const [formError, setFormError] = useState({});
   const [jobData, setJobData] = useState([]);
   const [job, setJob] = useState({
@@ -10,7 +12,6 @@ const WorkForm = () => {
     startDate: "",
     endDate: "",
     achievement: "",
-    skillUsed: "",
   });
 
   const validationSchema = Yup.object({
@@ -19,7 +20,6 @@ const WorkForm = () => {
     startDate: Yup.string().required("Starting Date is required"),
     endDate: Yup.string().required("Ending Date is required"),
     achievement: Yup.string().required("Achievement is required"),
-    skillUsed: Yup.string().required("Skill used is required"),
   });
 
   const handleChange = (e) => {
@@ -38,7 +38,6 @@ const WorkForm = () => {
         startDate: "",
         endDate: "",
         achievement: "",
-        skillUsed: "",
       });
       setFormError({});
       // TODO : Send the form data to redux store
@@ -49,6 +48,10 @@ const WorkForm = () => {
       });
       setFormError(customError);
     }
+  };
+
+  const handleAddNewJob = () => {
+    dispatch(addWorkData(jobData));
   };
 
   return (
@@ -147,32 +150,19 @@ const WorkForm = () => {
           )}
         </div>
 
-        <div>
-          <label
-            htmlFor="skillUsed"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Tell me about what skills you've used
-          </label>
-          <textarea
-            name="skillUsed"
-            value={job.skillUsed}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-          {formError.skillUsed && (
-            <p className="text-red-500">{formError.skillUsed}</p>
-          )}
-        </div>
-
         <button
           type="submit"
           className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Submit
+          Add
         </button>
       </form>
-
+      <button
+        onClick={handleAddNewJob}
+        className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2"
+      >
+        Submit
+      </button>
       {jobData.length > 0 && (
         <div className="mt-8">
           <h3 className="text-xl font-semibold mb-4">Job Experiences</h3>
@@ -183,7 +173,6 @@ const WorkForm = () => {
               <p>Start Date: {job.startDate}</p>
               <p>End Date: {job.endDate}</p>
               <p>Achievement: {job.achievement}</p>
-              <p>Skill Used: {job.skillUsed}</p>
             </div>
           ))}
         </div>

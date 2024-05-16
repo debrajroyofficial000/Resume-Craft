@@ -7,6 +7,7 @@ const workSlice = createSlice({
   initialState,
   reducers: {
     addWorkData: (state, action) => {
+      console.log(action.payload);
       state.workData = action.payload;
     },
   },

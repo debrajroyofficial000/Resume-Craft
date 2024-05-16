@@ -1,7 +1,10 @@
 import { useState } from "react";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { addProjectData } from "../features/projectSlice";
 
 const ProjectForm = () => {
+  const dispatch = useDispatch();
   const [projectData, setProjectData] = useState([]);
   const [project, setProject] = useState({
     title: "",
@@ -44,6 +47,10 @@ const ProjectForm = () => {
       });
       setFormError(customError);
     }
+  };
+
+  const handleAddSkill = () => {
+    dispatch(addProjectData(projectData));
   };
 
   return (
@@ -124,9 +131,15 @@ const ProjectForm = () => {
           type="submit"
           className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Submit
+          Add
         </button>
       </form>
+      <button
+        onClick={handleAddSkill}
+        className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2"
+      >
+        Submit
+      </button>
 
       {projectData.length > 0 && (
         <div className="mt-8">

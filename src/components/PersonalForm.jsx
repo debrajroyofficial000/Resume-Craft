@@ -1,7 +1,9 @@
 import { useState } from "react";
 import * as Yup from "yup";
-
+import { useDispatch } from "react-redux";
+import { addPersonalData } from "../features/personalSlice";
 const PersonalForm = () => {
+  const dispatch = useDispatch();
   const [formError, setFormError] = useState({});
   const [personalData, setPersonalData] = useState({
     name: "",
@@ -45,6 +47,7 @@ const PersonalForm = () => {
       setFormError({});
 
       // TODO : SEND THIS FORM DATA TO REDUX STORE
+      dispatch(addPersonalData(personalData));
     } catch (error) {
       const customError = {};
       error.inner.forEach((err) => {

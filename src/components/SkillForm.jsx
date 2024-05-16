@@ -1,7 +1,9 @@
 import { useState } from "react";
 import * as Yup from "yup";
-
+import { useDispatch } from "react-redux";
+import { addSkillData } from "../features/skillSlice";
 const SkillForm = () => {
+  const dispatch = useDispatch();
   const [formError, setFormError] = useState({});
   const [skill, setSkill] = useState("");
   const [skillData, setSkillData] = useState([]);
@@ -31,6 +33,9 @@ const SkillForm = () => {
       setFormError(customError);
     }
   };
+  const handleAddSkills = () => {
+    dispatch(addSkillData(skillData));
+  };
 
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
@@ -55,6 +60,12 @@ const SkillForm = () => {
         <button
           type="submit"
           className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Add
+        </button>
+        <button
+          onClick={handleAddSkills}
+          className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2"
         >
           Submit
         </button>

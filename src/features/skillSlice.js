@@ -7,10 +7,10 @@ const skillSlice = createSlice({
   initialState,
   reducers: {
     addSkillData: (state, action) => {
+      console.log(action.payload);
       state.skillData = action.payload;
     },
   },
-
 });
-export const {addSkillData} = skillSlice.actions;
-export default skillSlice.reducer
+export const { addSkillData } = skillSlice.actions;
+export default skillSlice.reducer;

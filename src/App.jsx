@@ -5,6 +5,8 @@ import PersonalForm from "./components/PersonalForm";
 import ProjectForm from "./components/ProjectForm";
 import SkillForm from "./components/SkillForm";
 import WorkForm from "./components/WorkForm";
+// REACT PDF
+import PDFGenerator from "./components/PDFGenerator";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <WorkForm />
         <ProjectForm />
         <SkillForm />
+        <PDFGenerator />
       </section>
       <Footer />
     </div>

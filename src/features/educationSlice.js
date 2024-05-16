@@ -8,6 +8,7 @@ const educationalSlice = createSlice({
   initialState,
   reducers: {
     addEducationalData: (state, action) => {
+      console.log(action.payload);
       state.educationalData = action.payload;
     },
   },
