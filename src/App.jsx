@@ -1,32 +1,17 @@
-import { Header, ResumeForm, ResumePdf } from "./components";
-import { useUserReducer } from "./reducers";
-import { UserProvider } from "./contexts";
-import { useState } from "react";
+import EducationalForm from "./components/EducationalForm";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import PersonalForm from "./components/PersonalForm";
 
 function App() {
-  const { personalData, educationalData, workExperienceData, userDispatch } =
-    useUserReducer();
-  const [showResume, setShowResume] = useState(false);
-  function toggleShowResume() {
-    if (educationalData.length > 0 && Object.keys(personalData).length === 0)
-      setShowResume(true);
-  }
   return (
-    <div className="max-w-full w-[1444px] mx-auto">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <UserProvider
-        value={{
-          personalData,
-          educationalData,
-          workExperienceData,
-          userDispatch,
-        }}
-      >
-        <section className="flex justify-between items-start">
-          <ResumeForm toggleFunc={toggleShowResume} />
-          <ResumePdf show={showResume} />
-        </section>
-      </UserProvider>
+      <section className="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <PersonalForm />
+        <EducationalForm />
+      </section>
+      <Footer />
     </div>
   );
 }

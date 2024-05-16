@@ -1,12 +1,13 @@
-import logo from "../assets/logo.png";
-function Header() {
+import logo from "/assets/logo.svg";
+
+const Header = () => {
   return (
-    <header className=" flex justify-center items-center p-4 bg-slate-950">
-      <div className="w-80 max-w-full">
-        <img src={logo} alt="logo" className="object-contain w-full" />
+    <header className="border flex justify-center items-center shadow-md mb-4  w-full">
+      <div className="w-[200px] py-2">
+        <img src={logo} alt="logo" className="w-full object-contain" />
       </div>
     </header>
   );
-}
+};
 
 export default Header;

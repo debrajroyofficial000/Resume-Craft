@@ -1,43 +1,40 @@
 import { useState } from "react";
 import * as Yup from "yup";
 
-const PersonalForm = () => {
+const EducationalForm = () => {
   const [formError, setFormError] = useState({});
-  const [personalData, setPersonalData] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    address: "",
-    linkedInProfile: "",
-    portfolio: "",
+  const [educationalData, setEducationalData] = useState({
+    degree: "",
+    fieldOfStudy: "",
+    university: "",
+    location: "",
+    startDate: "",
+    endDate: "",
   });
 
   const validateSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    phoneNumber: Yup.string().matches(
-      /^[0-9]{10}$/,
-      "Phone number must be 10 digits"
-    ),
-    address: Yup.string().required("Address is required"),
-    linkedInProfile: Yup.string().url("Invalid URL").nonNullable().required(),
-    portfolio: Yup.string().url("Invalid Url").nonNullable().required(),
+    degree: Yup.string().required("Degree is required"),
+    fieldOfStudy: Yup.string().required("Field Of Study is required"),
+    university: Yup.string().required("University is required"),
+    location: Yup.string().required("Location is required"),
+    startDate: Yup.string().required("Start Date is required"),
+    endDate: Yup.string().required("End Date is required"),
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPersonalData({ ...personalData, [name]: value });
+    setEducationalData({
+      ...educationalData,
+      [name]: value,
+    });
   };
 
-  const handlePersonalForm = async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await validateSchema.validate(personalData, { abortEarly: false });
-      console.log("Form submitted", personalData);
-
-      // TODO : SEND THIS FORM DATA TO REDUX STORE
+      await validateSchema.validate(educationalData, { abortEarly: false });
+      console.log("Form Submitted", educationalData);
+      // TODO : Submit this form data to redux store
     } catch (error) {
       const customError = {};
       error.inner.forEach((err) => {
@@ -49,121 +46,128 @@ const PersonalForm = () => {
 
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
-      <h3 className="text-2xl font-semibold mb-6">Personal Data</h3>
-      <form onSubmit={handlePersonalForm} className="space-y-4">
+      <h3 className="text-2xl font-semibold mb-6">Educational Form</h3>
+      <form onSubmit={handleFormSubmit} className="space-y-4">
         <div>
           <label
-            htmlFor="name"
+            htmlFor="degree"
             className="block text-sm font-medium text-gray-700"
           >
-            Name
+            Degree
           </label>
           <input
             type="text"
-            name="name"
-            value={personalData.name}
+            name="degree"
+            value={educationalData.degree}
             onChange={handleChange}
             className={`mt-1 block w-full px-3 py-2 border ${
-              formError.name ? "border-red-500" : "border-gray-300"
+              formError.degree ? "border-red-500" : "border-gray-300"
             } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
-          {formError.name && <p className="text-red-500">{formError.name}</p>}
+          {formError.degree && (
+            <p className="text-red-500 text-sm mt-1">{formError.degree}</p>
+          )}
         </div>
         <div>
           <label
-            htmlFor="email"
+            htmlFor="fieldOfStudy"
             className="block text-sm font-medium text-gray-700"
           >
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={personalData.email}
-            onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.email ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-          />
-          {formError.email && <p className="text-red-500">{formError.email}</p>}
-        </div>
-        <div>
-          <label
-            htmlFor="phoneNumber"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Phone Number
+            Field of Study
           </label>
           <input
             type="text"
-            name="phoneNumber"
-            value={personalData.phoneNumber}
+            name="fieldOfStudy"
+            value={educationalData.fieldOfStudy}
             onChange={handleChange}
             className={`mt-1 block w-full px-3 py-2 border ${
-              formError.phoneNumber ? "border-red-500" : "border-gray-300"
+              formError.fieldOfStudy ? "border-red-500" : "border-gray-300"
             } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
-          {formError.phoneNumber && (
-            <p className="text-red-500">{formError.phoneNumber}</p>
+          {formError.fieldOfStudy && (
+            <p className="text-red-500 text-sm mt-1">
+              {formError.fieldOfStudy}
+            </p>
           )}
         </div>
         <div>
           <label
-            htmlFor="address"
+            htmlFor="university"
             className="block text-sm font-medium text-gray-700"
           >
-            Address
-          </label>
-          <textarea
-            name="address"
-            value={personalData.address}
-            onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border ${
-              formError.address ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-          />
-          {formError.address && (
-            <p className="text-red-500">{formError.address}</p>
-          )}
-        </div>
-        <div>
-          <label
-            htmlFor="linkedInProfile"
-            className="block text-sm font-medium text-gray-700"
-          >
-            LinkedIn Profile
+            University
           </label>
           <input
-            type="url"
-            name="linkedInProfile"
-            value={personalData.linkedInProfile}
+            type="text"
+            name="university"
+            value={educationalData.university}
             onChange={handleChange}
             className={`mt-1 block w-full px-3 py-2 border ${
-              formError.linkedInProfile ? "border-red-500" : "border-gray-300"
+              formError.university ? "border-red-500" : "border-gray-300"
             } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
-          {formError.linkedInProfile && (
-            <p className="text-red-500">{formError.linkedInProfile}</p>
+          {formError.university && (
+            <p className="text-red-500 text-sm mt-1">{formError.university}</p>
           )}
         </div>
         <div>
           <label
-            htmlFor="portfolio"
+            htmlFor="location"
             className="block text-sm font-medium text-gray-700"
           >
-            Portfolio
+            Location
           </label>
           <input
-            type="url"
-            name="portfolio"
-            value={personalData.portfolio}
+            type="text"
+            name="location"
+            value={educationalData.location}
             onChange={handleChange}
             className={`mt-1 block w-full px-3 py-2 border ${
-              formError.portfolio ? "border-red-500" : "border-gray-300"
+              formError.location ? "border-red-500" : "border-gray-300"
             } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
           />
-          {formError.portfolio && (
-            <p className="text-red-500">{formError.portfolio}</p>
+          {formError.location && (
+            <p className="text-red-500 text-sm mt-1">{formError.location}</p>
+          )}
+        </div>
+        <div>
+          <label
+            htmlFor="startDate"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Starting Date
+          </label>
+          <input
+            type="date"
+            name="startDate"
+            value={educationalData.startDate}
+            onChange={handleChange}
+            className={`mt-1 block w-full px-3 py-2 border ${
+              formError.startDate ? "border-red-500" : "border-gray-300"
+            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+          />
+          {formError.startDate && (
+            <p className="text-red-500 text-sm mt-1">{formError.startDate}</p>
+          )}
+        </div>
+        <div>
+          <label
+            htmlFor="endDate"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Ending Date
+          </label>
+          <input
+            type="date"
+            name="endDate"
+            value={educationalData.endDate}
+            onChange={handleChange}
+            className={`mt-1 block w-full px-3 py-2 border ${
+              formError.endDate ? "border-red-500" : "border-gray-300"
+            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+          />
+          {formError.endDate && (
+            <p className="text-red-500 text-sm mt-1">{formError.endDate}</p>
           )}
         </div>
         <button
@@ -177,4 +181,4 @@ const PersonalForm = () => {
   );
 };
 
-export default PersonalForm;
+export default EducationalForm;
