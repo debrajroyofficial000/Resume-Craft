@@ -1,12 +1,14 @@
 import { useState } from "react";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addProjectData } from "../features/projectSlice";
+import { addProjectData, removeProject } from "../features/projectSlice";
+import { nanoid } from "@reduxjs/toolkit";
 
 const ProjectForm = () => {
   const dispatch = useDispatch();
   const [projectData, setProjectData] = useState([]);
   const [project, setProject] = useState({
+    id: "",
     title: "",
     description: "",
     technologyUsed: "",
@@ -30,7 +32,7 @@ const ProjectForm = () => {
     e.preventDefault();
     try {
       await validationSchema.validate(project, { abortEarly: false });
-      setProjectData([...projectData, project]);
+      setProjectData([...projectData, { ...project, id: nanoid() }]);
       setProject({
         title: "",
         description: "",
@@ -51,6 +53,12 @@ const ProjectForm = () => {
 
   const handleAddSkill = () => {
     dispatch(addProjectData(projectData));
+  };
+
+  const handleRemoveProject = (id) => {
+    const updatedProject = projectData.filter((project) => project.id !== id);
+    setProjectData(updatedProject);
+    dispatch(removeProject(id));
   };
 
   return (
@@ -144,12 +152,21 @@ const ProjectForm = () => {
       {projectData.length > 0 && (
         <div className="mt-8">
           <h3 className="text-xl font-semibold mb-4">Projects</h3>
-          {projectData.map((project, index) => (
-            <div key={index} className="p-4 border rounded-md shadow-sm mb-4">
+          {projectData.map((project) => (
+            <div
+              key={project.id}
+              className="p-4 border rounded-md shadow-sm mb-4"
+            >
               <h4 className="text-lg font-medium">Title: {project.title}</h4>
               <p>Description: {project.description}</p>
               <p>Technology Used: {project.technologyUsed}</p>
               <p>Project Link: {project.link}</p>
+              <button
+                className="bg-red-500 px-4 py-2 rounded text-white mt-2"
+                onClick={() => handleRemoveProject(project.id)}
+              >
+                Remove
+              </button>
             </div>
           ))}
         </div>

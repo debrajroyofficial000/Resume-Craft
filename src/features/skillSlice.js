@@ -10,7 +10,12 @@ const skillSlice = createSlice({
       console.log(action.payload);
       state.skillData = action.payload;
     },
+    removeSkill: (state, action) => {
+      state.skillData = state.skillData.filter(
+        (skill) => skill.id !== action.payload
+      );
+    },
   },
 });
-export const { addSkillData } = skillSlice.actions;
+export const { addSkillData, removeSkill } = skillSlice.actions;
 export default skillSlice.reducer;

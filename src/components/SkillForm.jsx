@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { nanoid } from "@reduxjs/toolkit";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addSkillData } from "../features/skillSlice";
+import { addSkillData, removeSkill } from "../features/skillSlice";
 const SkillForm = () => {
   const dispatch = useDispatch();
   const [formError, setFormError] = useState({});
-  const [skill, setSkill] = useState("");
+  const [skill, setSkill] = useState({ id: "", skill: "" });
   const [skillData, setSkillData] = useState([]);
 
   const validateSchema = Yup.object({
@@ -13,15 +14,15 @@ const SkillForm = () => {
   });
 
   const handleChange = (e) => {
-    setSkill(e.target.value);
+    setSkill({ id: nanoid(), skill: e.target.value });
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await validateSchema.validate({ skill }, { abortEarly: false });
+      await validateSchema.validate(skill, { abortEarly: false });
       setSkillData([...skillData, skill]);
-      setSkill("");
+      setSkill({ id: "", skill: "" });
       setFormError({});
 
       // TODO : Submit this for to redux store
@@ -37,6 +38,11 @@ const SkillForm = () => {
     dispatch(addSkillData(skillData));
   };
 
+  const handleDeleteSkill = (id) => {
+    const updatedSkills = skillData.filter((skill) => skill.id !== id);
+    setSkillData(updatedSkills);
+    dispatch(removeSkill(id));
+  };
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
       <h3 className="text-2xl font-semibold mb-6">Skills</h3>
@@ -51,7 +57,7 @@ const SkillForm = () => {
           <input
             type="text"
             name="skill"
-            value={skill}
+            value={skill.skill}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
@@ -71,9 +77,14 @@ const SkillForm = () => {
         Submit
       </button>
       <section className="flex justify-start items-center gap-4">
-        {skillData?.map((skill, index) => (
-          <div key={index} className="mt-4 bg-gray-100 p-4 rounded-md">
-            <p>{skill}</p>
+        {skillData?.map((skill) => (
+          <div
+            key={skill.id}
+            className="mt-4 bg-gray-100 p-4 rounded-md flex justify-center items-center gap-2"
+            onClick={() => handleDeleteSkill(skill.id)}
+          >
+            <i className="fa-solid fa-circle-xmark"></i>
+            <p>{skill.skill}</p>
           </div>
         ))}
       </section>

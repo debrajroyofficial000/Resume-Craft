@@ -1,12 +1,14 @@
 import { useState } from "react";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addWorkData } from "../features/workSlice";
+import { addWorkData, removeJob } from "../features/workSlice";
+import { nanoid } from "@reduxjs/toolkit";
 const WorkForm = () => {
   const dispatch = useDispatch();
   const [formError, setFormError] = useState({});
   const [jobData, setJobData] = useState([]);
   const [job, setJob] = useState({
+    id: "",
     role: "",
     companyName: "",
     startDate: "",
@@ -31,7 +33,7 @@ const WorkForm = () => {
     e.preventDefault();
     try {
       await validationSchema.validate(job, { abortEarly: false });
-      setJobData([...jobData, job]);
+      setJobData([...jobData, { ...job, id: nanoid() }]);
       setJob({
         role: "",
         companyName: "",
@@ -54,6 +56,11 @@ const WorkForm = () => {
     dispatch(addWorkData(jobData));
   };
 
+  const handleRemoveJob = (id) => {
+    const updatedJob = jobData.filter((job) => job.id !== id);
+    setJobData(updatedJob);
+    dispatch(removeJob(id));
+  };
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
       <h3 className="text-2xl font-semibold mb-6">Work Experience</h3>
@@ -166,13 +173,19 @@ const WorkForm = () => {
       {jobData.length > 0 && (
         <div className="mt-8">
           <h3 className="text-xl font-semibold mb-4">Job Experiences</h3>
-          {jobData.map((job, index) => (
-            <div key={index} className="p-4 border rounded-md shadow-sm mb-4">
+          {jobData.map((job) => (
+            <div key={job.id} className="p-4 border rounded-md shadow-sm mb-4">
               <h4 className="text-lg font-medium">Role: {job.role}</h4>
               <p>Company Name: {job.companyName}</p>
               <p>Start Date: {job.startDate}</p>
               <p>End Date: {job.endDate}</p>
               <p>Achievement: {job.achievement}</p>
+              <button
+                className="bg-red-500 px-4 py-2 rounded text-white mt-2"
+                onClick={() => handleRemoveJob(job.id)}
+              >
+                Remove
+              </button>
             </div>
           ))}
         </div>

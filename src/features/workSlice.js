@@ -10,7 +10,12 @@ const workSlice = createSlice({
       console.log(action.payload);
       state.workData = action.payload;
     },
+    removeJob: (state, action) => {
+      state.workData = state.workData.filter(
+        (job) => job.id !== action.payload
+      );
+    },
   },
 });
-export const { addWorkData } = workSlice.actions;
+export const { addWorkData, removeJob } = workSlice.actions;
 export default workSlice.reducer;

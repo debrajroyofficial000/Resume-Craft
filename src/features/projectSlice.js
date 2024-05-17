@@ -10,8 +10,13 @@ const projectSlice = createSlice({
       console.log(action.payload);
       state.projectData = action.payload;
     },
+    removeProject: (state, action) => {
+      state.projectData = state.projectData.filter(
+        (project) => project.id !== action.payload
+      );
+    },
   },
 });
 
-export const { addProjectData } = projectSlice.actions;
+export const { addProjectData, removeProject } = projectSlice.actions;
 export default projectSlice.reducer;
