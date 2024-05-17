@@ -63,18 +63,20 @@ const SkillForm = () => {
         >
           Add
         </button>
-        <button
-          onClick={handleAddSkills}
-          className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2"
-        >
-          Submit
-        </button>
       </form>
-      {skillData?.map((skill, index) => (
-        <div key={index} className="mt-4 bg-gray-100 p-4 rounded-md">
-          <p>{skill}</p>
-        </div>
-      ))}
+      <button
+        onClick={handleAddSkills}
+        className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2"
+      >
+        Submit
+      </button>
+      <section className="flex justify-start items-center gap-4">
+        {skillData?.map((skill, index) => (
+          <div key={index} className="mt-4 bg-gray-100 p-4 rounded-md">
+            <p>{skill}</p>
+          </div>
+        ))}
+      </section>
     </section>
   );
 };
