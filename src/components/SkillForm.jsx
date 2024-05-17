@@ -24,8 +24,6 @@ const SkillForm = () => {
       setSkillData([...skillData, skill]);
       setSkill({ id: "", skill: "" });
       setFormError({});
-
-      // TODO : Submit this for to redux store
     } catch (error) {
       const customError = {};
       error.inner.forEach((err) => {
@@ -36,6 +34,7 @@ const SkillForm = () => {
   };
   const handleAddSkills = () => {
     dispatch(addSkillData(skillData));
+    alert("Form has been submitted");
   };
 
   const handleDeleteSkill = (id) => {
@@ -65,7 +64,7 @@ const SkillForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className=" bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Add
         </button>

@@ -43,11 +43,9 @@ const PersonalForm = () => {
     e.preventDefault();
     try {
       await validateSchema.validate(personalData, { abortEarly: false });
-
       setFormError({});
-
-      // TODO : SEND THIS FORM DATA TO REDUX STORE
       dispatch(addPersonalData(personalData));
+      alert("Form has been submitted");
     } catch (error) {
       const customError = {};
       error.inner.forEach((err) => {

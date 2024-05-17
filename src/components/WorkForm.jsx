@@ -42,7 +42,6 @@ const WorkForm = () => {
         achievement: "",
       });
       setFormError({});
-      // TODO : Send the form data to redux store
     } catch (error) {
       const customError = {};
       error.inner.forEach((err) => {
@@ -54,6 +53,7 @@ const WorkForm = () => {
 
   const handleAddNewJob = () => {
     dispatch(addWorkData(jobData));
+    alert("Form has been submitted");
   };
 
   const handleRemoveJob = (id) => {
@@ -159,7 +159,7 @@ const WorkForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Add
         </button>

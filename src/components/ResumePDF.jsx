@@ -68,8 +68,11 @@ const ResumePDF = ({
           </Text>
           <Text style={styles.itemTitle}>
             LinkedIn :
-            <Link style={styles.itemDescription}>
-              {personalData.linkedInProfile}
+            <Link
+              style={styles.itemDescription}
+              src={personalData.linkedInProfile}
+            >
+              Link
             </Link>
           </Text>
           <Text style={styles.itemTitle}>

@@ -40,8 +40,6 @@ const ProjectForm = () => {
         link: "",
       });
       setFormError({});
-
-      // TODO : add the form state to the redux store
     } catch (error) {
       const customError = {};
       error.inner.forEach((err) => {
@@ -53,6 +51,7 @@ const ProjectForm = () => {
 
   const handleAddSkill = () => {
     dispatch(addProjectData(projectData));
+    alert("Form has been submitted");
   };
 
   const handleRemoveProject = (id) => {
@@ -137,7 +136,7 @@ const ProjectForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className=" bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Add
         </button>
