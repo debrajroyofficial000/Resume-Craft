@@ -59,7 +59,7 @@ npm run dev
 6. ProjectForm: Form to input project details.
 7. SkillForm: Form to input skills.
 8. PDFGenerator: Generates the PDF resume.
-9. ResumePDF : Create Resume Pdf
+9. ResumePDF: Create Resume Pdf
 
 ## Technologies Used
 
@@ -79,4 +79,4 @@ npm run dev
 
 ## Preview
 
-[Preview](https://6646f1ab5b0c796edc3268ee--simpleresumecraft.netlify.app/)
+[Preview](https://665f5e5f65b68a3452dcf3d2--react-resume-craft.netlify.app/)
